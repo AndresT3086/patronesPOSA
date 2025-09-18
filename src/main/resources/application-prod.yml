@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/sura_clientes}
+    username: ${DATABASE_USER:sura_user}
+    password: ${DATABASE_PASSWORD:sura_password}
+  jpa:
+    show-sql: false
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      batch-size: 16384
+      linger-ms: 5
+
+logging:
+  level:
+    com.sura.cliente: INFO
+    org.springframework.kafka: WARN

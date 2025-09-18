@@ -1,0 +1,74 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: cliente-service
+  profiles:
+    active: dev
+
+  # Configuración de Base de Datos PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5433/sura_clientes
+    username: sura_user
+    password: sura_password
+    driver-class-name: org.postgresql.Driver
+
+  # Configuración JPA/Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # Configuración Kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      #key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      #acks: all
+      #retries: 3
+
+# Configuración simple de Swagger
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+
+# Actuator para métricas
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+# Logging
+logging:
+  level:
+    com.sura.cliente: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Configuración Kafka Topics
+kafka:
+  topics:
+    client-events: "client-events-topic"

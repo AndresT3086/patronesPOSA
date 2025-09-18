@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/sura_clientes
+    username: sura_user
+    password: sura_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+
+logging:
+  level:
+    com.sura.cliente: DEBUG
