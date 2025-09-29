@@ -19,12 +19,10 @@ public class ValidacionNegocioFilter implements Filter<ActualizarClienteRequest>
     @Override
     public ActualizarClienteRequest process(ActualizarClienteRequest input) throws FilterException {
 
-        // Validar ciudad si se proporciona
         if (input.getCiudad() != null && !CIUDADES_VALIDAS.contains(input.getCiudad().toUpperCase())) {
             throw new FilterException("Ciudad no válida. Ciudades permitidas: " + CIUDADES_VALIDAS);
         }
 
-        // Validaciones adicionales de negocio
         if (input.getTelefono() != null && input.getTelefono().startsWith("0")) {
             throw new FilterException("El teléfono no puede comenzar con 0");
         }

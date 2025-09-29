@@ -22,47 +22,6 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-/*    @PutMapping("/{numeroDocumento}")
-    public ResponseEntity<Map<String, Object>> actualizarCliente(
-            @PathVariable String numeroDocumento,
-            @Valid @RequestBody ActualizarClienteRequest request) {
-
-        try {
-            // Asegurar que el número de documento coincida
-            request.setNumeroDocumento(numeroDocumento);
-
-            Cliente clienteActualizado = clienteService.actualizarCliente(request);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", true);
-            response.put("message", "Cliente actualizado exitosamente");
-            response.put("data", clienteActualizado);
-
-            return ResponseEntity.ok(response);
-
-        } catch (FilterException e) {
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("success", false);
-            errorResponse.put("message", "Error de validación: " + e.getMessage());
-
-            return ResponseEntity.badRequest().body(errorResponse);
-
-        } catch (RuntimeException e) {
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("success", false);
-            errorResponse.put("message", e.getMessage());
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-
-        } catch (Exception e) {
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("success", false);
-            errorResponse.put("message", "Error interno del servidor");
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }*/
-
     @PutMapping("/{numeroDocumento}")
     public ResponseEntity<Map<String, Object>> actualizarCliente(
             @Parameter(description = "Número de documento del cliente", example = "12345678")

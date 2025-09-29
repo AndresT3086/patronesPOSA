@@ -37,68 +37,6 @@ public class ClienteService {
                 .addFilter(validacionNegocioFilter);
     }
 
-/*    public Cliente actualizarCliente(ActualizarClienteRequest request) throws FilterException {
-
-        // Ejecutar pipeline de procesamiento
-        ActualizarClienteRequest requestProcesado = pipeline.execute(request);
-
-        // Buscar cliente existente
-        Cliente cliente = clienteRepository.findByNumeroDocumento(requestProcesado.getNumeroDocumento())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado: " + requestProcesado.getNumeroDocumento()));
-
-        // Capturar cambios para el evento
-        Map<String, Object> cambios = new HashMap<>();
-
-        // Actualizar campos y registrar cambios
-        if (requestProcesado.getEmail() != null && !requestProcesado.getEmail().equals(cliente.getEmail())) {
-            cambios.put("email", Map.of(
-                    "anterior", cliente.getEmail(),
-                    "nuevo", requestProcesado.getEmail()
-            ));
-            cliente.setEmail(requestProcesado.getEmail());
-        }
-
-        if (requestProcesado.getTelefono() != null && !requestProcesado.getTelefono().equals(cliente.getTelefono())) {
-            cambios.put("telefono", Map.of(
-                    "anterior", cliente.getTelefono(),
-                    "nuevo", requestProcesado.getTelefono()
-            ));
-            cliente.setTelefono(requestProcesado.getTelefono());
-        }
-
-        if (requestProcesado.getDireccion() != null && !requestProcesado.getDireccion().equals(cliente.getDireccion())) {
-            cambios.put("direccion", Map.of(
-                    "anterior", cliente.getDireccion(),
-                    "nuevo", requestProcesado.getDireccion()
-            ));
-            cliente.setDireccion(requestProcesado.getDireccion());
-        }
-
-        if (requestProcesado.getCiudad() != null && !requestProcesado.getCiudad().equals(cliente.getCiudad())) {
-            cambios.put("ciudad", Map.of(
-                    "anterior", cliente.getCiudad(),
-                    "nuevo", requestProcesado.getCiudad()
-            ));
-            cliente.setCiudad(requestProcesado.getCiudad());
-        }
-
-        // Guardar en base de datos
-        Cliente clienteActualizado = clienteRepository.save(cliente);
-
-        // Enviar evento a Kafka si hubo cambios
-        if (!cambios.isEmpty()) {
-            ClienteEventDto evento = new ClienteEventDto(
-                    "CLIENT_UPDATED",
-                    cliente.getNumeroDocumento(),
-                    cliente.getNombreCompleto(),
-                    cambios
-            );
-            //kafkaProducerService.sendClientEvent(evento);
-        }
-
-        return clienteActualizado;
-    }*/
-
     public Cliente actualizarCliente(String numeroDocumento, ActualizarClienteRequest request) throws FilterException {
 
         // Ejecutar pipeline de procesamiento

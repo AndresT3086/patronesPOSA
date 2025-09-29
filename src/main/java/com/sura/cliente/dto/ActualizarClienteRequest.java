@@ -13,18 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class ActualizarClienteRequest {
 
-/*    @NotBlank
-    private String numeroDocumento;
-
-    @Email
-    private String email;
-
-    @Size(min = 10, max = 20)
-    private String telefono;
-
-    private String direccion;
-    private String ciudad;*/
-
     @Schema(description = "Correo electrónico del cliente",
             example = "nuevo@email.com",
             required = false)
